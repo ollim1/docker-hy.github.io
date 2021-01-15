@@ -3,7 +3,7 @@ services:
   coursematerial:
     image: jakousa/docker-hy
     ports:
-      - 4000:80
+      - 80:80
     container_name: coursematerial
   watchtower:
     image: containrrr/watchtower
