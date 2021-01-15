@@ -1,19 +1,20 @@
 version: 2.1
 orbs:
   docker: circleci/docker@1.0.0
+jobs:
+  deploy_heroku:
+    steps:
+      - checkout
+      - run:
+          name: deploy to heroku
+          command: |
+            docker login --username=$HEROKU_USERNAME --password=$HEROKU_PASSWORD $REGISTRY_DOMAIN
+            docker tag londes/docker-hy:latest $REGISTRY_DOMAIN/$TARGET_REPOSITORY
+            docker push $REGISTRY_DOMAIN/$TARGET_REPOSITORY
 workflows:
   deploy:
     jobs:
       - docker/publish:
           image: londes/docker-hy
           tag: 'latest'
-  deploy-heroku:
-    jobs:
-      steps:
-        - checkout
-        - run:
-            name: deploy to heroku
-            command: |
-              docker login --username=$HEROKU_USERNAME --password=$HEROKU_PASSWORD $REGISTRY_DOMAIN
-              docker tag londes/docker-hy:latest $REGISTRY_DOMAIN/$TARGET_REPOSITORY
-              docker push $REGISTRY_DOMAIN/$TARGET_REPOSITORY
+      - deploy_heroku
