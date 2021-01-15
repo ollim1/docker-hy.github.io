@@ -11,3 +11,7 @@ jobs:
             docker login --username=$HEROKU_USERNAME --password=$HEROKU_PASSWORD $REGISTRY_DOMAIN
             docker tag londes/docker-hy:latest $REGISTRY_DOMAIN/$TARGET_REPOSITORY
             docker push $REGISTRY_DOMAIN/$TARGET_REPOSITORY
+workflows:
+  deploy_to_heroku:
+    jobs:
+      - deploy
