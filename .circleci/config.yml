@@ -2,6 +2,6 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.0.0
 jobs:
-  docker:
+  docker/publish:
     - image: londes/docker-hy
       tag: 'latest'
