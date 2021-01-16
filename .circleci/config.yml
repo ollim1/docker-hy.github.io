@@ -1,9 +1,8 @@
-version: 2.1
-
-orbs:
-  docker: circleci/docker@1.0.1
+version: 2
 
 jobs:
+  docker:
+    image: circleci/docker@1.0.1
   deploy:
     steps:
       - checkout
