@@ -16,5 +16,6 @@ jobs:
       - name: heroku push
         run: |
           echo ${{secrets.HEROKU_API_KEY}} | docker login --username=${{secrets.HEROKU_EMAIL}} --password-stdin registry.heroku.com
+          docker build .
           docker image tag londes/docker-hy:latest registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
           docker image push registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
