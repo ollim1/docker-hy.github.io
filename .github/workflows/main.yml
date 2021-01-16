@@ -13,5 +13,5 @@ jobs:
       - name: heroku push
         run: |
           docker login --username=${{secrets.HEROKU_EMAIL}} --password=${{secrets.HEROKU_API_KEY}} registry.heroku.com
-          docker tag londes/docker-hy:latest registry.heroku.com/frozen-chamber-94298/web
+          docker tag londes/docker-hy:latest registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
           docker push registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
