@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: heroku push
+        env: HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}} 
         run: |
-          echo ${{secrets.HEROKU_API_KEY}} | docker login --username=${{secrets.HEROKU_EMAIL}} --password-stdin registry.heroku.com
-          docker build .
-          docker image tag londes/docker-hy:latest registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
-          docker image push registry.heroku.com/${{secrets.HEROKU_APP_NAME}}/web
+          heroku container:login
+          heroku container:push -a ${{secrets.HEROKU_APP_NAME}} web
+          heroku container:release -a ${{secrets.HEROKU_APP_NAME}} web
